@@ -38,5 +38,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
         } else {
             die("Failed to move uploaded file.");
         }
+
+        
     } 
 ?>
