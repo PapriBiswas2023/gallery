@@ -41,7 +41,7 @@ $num=mysqli_num_rows($result);
               </td>
               <td><?= htmlspecialchars($row['category']) ?></td>
               <td>
-                <a href="edit-from.php?editid=<?= $row['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
+                <a href="edit-form.php?editid=<?= $row['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
                 <a href="edit-upload-prc.php?delid=<?= $row['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this image?')">Delete</a>
               </td>
             </tr>

@@ -1,6 +1,8 @@
 <?php 
 include('../database/db.php');
 $sql="SELECT * FROM images ORDER BY id DESC";
+$result=mysqli_query($conn, $sql);
+$num=mysqli_num_rows($result);
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +22,8 @@ $sql="SELECT * FROM images ORDER BY id DESC";
             <h4>Upload Image</h4>
           </div>
           <div class="card-body bg-white">
+            <?php if($num>0):?>
+              <?php while($row=mysqli_fetch_assoc($result)):?>
             <form action="../database/upload-prc.php" method="POST" enctype="multipart/form-data">
               <div class="mb-4">
                 <label for="category" class="form-label">Category</label>
@@ -33,6 +37,8 @@ $sql="SELECT * FROM images ORDER BY id DESC";
                 <button type="submit" class="btn btn-success">Upload</button>
               </div>
             </form>
+            <?php endwhile;?>
+            <?php endif;?>
           </div>
           <div class="card-footer text-center">
             <a href="index.php" class="btn btn-link">Back to Gallery</a>
