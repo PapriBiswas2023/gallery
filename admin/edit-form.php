@@ -27,14 +27,15 @@ $num=mysqli_num_rows($result);
             <form action="../database/upload-prc.php" method="POST" enctype="multipart/form-data">
               <div class="mb-4">
                 <label for="category" class="form-label">Category</label>
-                <input class="form-control" type="text" name="category" id="category" required>
+                <input class="form-control" type="text" name="category" id="category" value="<?=$row['category']?>" required>
               </div>
               <div class="mb-4">
                 <label for="image" class="form-label">Choose an image</label>
-                <input class="form-control" type="file" name="image" id="image" accept="image/*" required>
+                <input class="form-control" type="file" name="image" id="image" accept="image/*"  required>
               </div>
               <div class="d-grid mb-3">
                 <button type="submit" class="btn btn-success">Upload</button>
+                <input type="hidden" name="editid" value="<?= $row['id'] ?>">
               </div>
             </form>
             <?php endwhile;?>
@@ -46,6 +47,6 @@ $num=mysqli_num_rows($result);
         </div>
       </div>
     </div>
-  </div>
+  </div> 
 </body>
 </html>
