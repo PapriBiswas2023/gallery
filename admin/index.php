@@ -3,8 +3,6 @@ include('../database/db.php');
 $sql = "SELECT * FROM images ORDER BY id DESC";
 $result = mysqli_query($conn, $sql);
 $num=mysqli_num_rows($result);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -41,8 +39,8 @@ $num=mysqli_num_rows($result);
               </td>
               <td><?= htmlspecialchars($row['category']) ?></td>
               <td>
-                <a href="edit-form.php?editid=<?= $row['id'] ?>" class="btn btn-sm btn-warning">Edit</a>
-                <a href="edit-upload-prc.php?delid=<?= $row['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this image?')">Delete</a>
+                <a href="edit-form.php?editid=<?= $row['id'] ?>" onClick="return conedit()" class="btn btn-sm btn-warning">Edit</a>
+                <a href="edit-upload-prc.php?delid=<?= $row['id'] ?>" class="btn btn-sm btn-danger" onclick="return condel()">Delete</a>
               </td>
             </tr>
           <?php endwhile; ?>
@@ -55,5 +53,14 @@ $num=mysqli_num_rows($result);
     </table>
   </div>
 </div>
+ <script>
+    function conedit(){
+      return confirm("Do you want to edit this image?");
+    }
+
+    function condel(){
+      return confirm("Are you sure to delete this image?");
+    }
+  </script>
 </body>
 </html>
