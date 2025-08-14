@@ -40,6 +40,7 @@ $result = mysqli_query($conn, $sql);
                 echo '    <img src="'.$row['filename'].'" class="card-img-top fixed-img" alt="'.htmlspecialchars($row['filename']).'">';
                 echo '    <div class="card-body text-center">';
                 echo '      <p class="card-text">'.htmlspecialchars($row['category']).'</p>';
+                echo '     <a href="download.php?file=' . urlencode($row['filename']) . '" download class="btn btn-success btn-sm">Download</a> ';
                 echo '    </div>';
                 echo '  </div>';
                 echo '</div>';
