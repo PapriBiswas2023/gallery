@@ -1,9 +1,23 @@
+<?php 
+include('../database/db.php');
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$sql= "SELECT * FROM images";
+if(!empty($search)) {
+    $searchEscaped = mysqli_real_escape_string($conn, $search);
+    $sql .= " WHERE filename LIKE '%$searchEscaped%' OR category LIKE '%$searchEscaped%'";
+    
+}
+$result = mysqli_query($conn, $sql);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Gallery</title>
 </head>
 <body class="bg-light">
@@ -19,26 +33,18 @@
     
     <div class="row">
         <?php
-        $search = isset($_GET['search']) ? strtolower($_GET['search']) : '';
-        $images = glob("uploads/*.{jpg,jpeg,png,gif}", GLOB_BRACE);
-        $found = false;
-
-        foreach ($images as $img) {
-            $filename = strtolower(basename($img));
-            if (empty($search) || strpos($filename, $search) !== false) {
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
                 echo '<div class="col-md-3 mb-4">';
                 echo '  <div class="card shadow-sm">';
-                echo '    <img src="'.$img.'" class="card-img-top" alt="'.$filename.'">';
+                echo '    <img src="'.$row['filename'].'" class="card-img-top fixed-img" alt="'.htmlspecialchars($row['filename']).'">';
                 echo '    <div class="card-body text-center">';
-                echo '      <p class="card-text">'.htmlspecialchars($filename).'</p>';
+                echo '      <p class="card-text">'.htmlspecialchars($row['category']).'</p>';
                 echo '    </div>';
                 echo '  </div>';
                 echo '</div>';
-                $found = true;
             }
-        }
-
-        if (!$found) {
+        } else {
             echo '<div class="col-12 text-center"><p>No images found for "<strong>' . htmlspecialchars($search) . '</strong>"</p></div>';
         }
         ?>
