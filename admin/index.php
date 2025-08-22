@@ -62,5 +62,6 @@ $num=mysqli_num_rows($result);
       return confirm("Are you sure to delete this image?");
     }
   </script>
+  
 </body>
 </html>
