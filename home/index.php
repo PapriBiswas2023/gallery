@@ -33,12 +33,12 @@ $result = mysqli_query($conn, $sql);
 <nav class="navbar bg-body-tertiary fixed-top">
     <div class="container-fluid">
       
-      <a class="navbar-brand" href="#">Offcanvas navbar</a>
+      <a class="navbar-brand" href="#">Gallery</a>
 
       
       <div class="d-flex">
-        <button class="btn btn-outline-success me-2" type="button">Registration</button>
-        <button class="btn btn-outline-success" type="button">Login</button>
+        <a href="registration.php"><button class="btn btn-outline-success me-2" type="button">Registration</button></a>
+        <a href="login.php"><button class="btn btn-outline-success" type="button">Login</button></a>
         
         
         <button class="navbar-toggler ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -70,7 +70,7 @@ $result = mysqli_query($conn, $sql);
     </div>
   </nav>
     <div class="container mt-5 pt-4">
-    <h2 class="text-center mb-4 mt-3">Image Gallery</h2>
+    <!--<h2 class="text-center mb-4 mt-3">Image Gallery</h2>-->
 
    
     <form class="d-flex justify-content-center mb-4" method="GET" action="">
