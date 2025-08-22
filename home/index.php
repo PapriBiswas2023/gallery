@@ -29,8 +29,48 @@ $result = mysqli_query($conn, $sql);
     <title>Gallery</title>
 </head>
 <body class="bg-light">
-    <div class="container mt-4">
-    <h2 class="text-center mb-4">Image Gallery</h2>
+
+<nav class="navbar bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+      
+      <a class="navbar-brand" href="#">Offcanvas navbar</a>
+
+      
+      <div class="d-flex">
+        <button class="btn btn-outline-success me-2" type="button">Registration</button>
+        <button class="btn btn-outline-success" type="button">Login</button>
+        
+        
+        <button class="navbar-toggler ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Likes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Wishlist</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Download</a>
+            </li>
+            <li class="nav-item">Logout</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+    <div class="container mt-5 pt-4">
+    <h2 class="text-center mb-4 mt-3">Image Gallery</h2>
 
    
     <form class="d-flex justify-content-center mb-4" method="GET" action="">
@@ -85,6 +125,6 @@ $result = mysqli_query($conn, $sql);
             </nav>
         <?php endif; ?>
     </div>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
