@@ -38,7 +38,9 @@
     <div class="marquee">
       <span>Register Here</span>
     </div>
-    <form class="container mt-5" style="max-width: 500px; background-color: #f8f9fa; padding: 20px; border-radius: 5px;">
+    <form class="container mt-5" action="../database/reg-prc.php" method="POST" id="registerForm" style="max-width: 500px; background-color: #f8f9fa; padding: 20px; border-radius: 5px;">
+      <div id="successMsg" class="alert alert-success d-none"></div>
+      <div id="errorMsg" class="alert alert-danger d-none"></div>
   <div class="mb-3">
     <label for="name" class="form-label">User Name</label>
     <input type="text" class="form-control" id="name" aria-describedby="name">
@@ -51,5 +53,45 @@
   
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<script>
+  const form = document.getElementById('registerForm');
+  const successMsg = document.getElementById('successMsg');
+  const errorMsg = document.getElementById('errorMsg'); 
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    let formData = new FormData(form);
+
+    fetch('../database/reg-prc.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+      if (data.trim() === "success") {
+        successMsg.textContent = "Your Registration is Successfully Completed";
+        successMsg.classList.remove('d-none');
+        errorMsg.classList.add('d-none');
+        form.reset();
+
+        setTimeout(() => {
+          successMsg.classList.add('d-none');
+        }, 3000);
+      } else {
+        errorMsg.textContent = "Something went wrong. Please try again.";
+        errorMsg.classList.remove('d-none');
+      }
+    })
+    .catch(error => {
+      errorMsg.textContent = "Server error. Please try again.";
+      errorMsg.classList.remove('d-none');
+    });
+  });
+</script>
+
+
+
+
 </body>
 </html>
