@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registration</title>
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 </head>
@@ -43,12 +43,12 @@
       <div id="errorMsg" class="alert alert-danger d-none"></div>
   <div class="mb-3">
     <label for="name" class="form-label">User Name</label>
-    <input type="text" class="form-control" id="name" aria-describedby="name">
+    <input type="text" class="form-control" id="name" aria-describedby="name" name="name">
     
   </div>
   <div class="mb-3">
     <label for="Phone" class="form-label">Phone Number</label>
-    <input type="text" class="form-control" id="Phone">
+    <input type="text" class="form-control" id="phone" name="phone">
   </div>
   
   <button type="submit" class="btn btn-primary">Submit</button>
@@ -56,7 +56,7 @@
 <script>
   const form = document.getElementById('registerForm');
   const successMsg = document.getElementById('successMsg');
-  const errorMsg = document.getElementById('errorMsg'); 
+  const errorMsg = document.getElementById('errorMsg');
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -67,10 +67,10 @@
       method: 'POST',
       body: formData
     })
-    .then(response => response.text())
-    .then(data => {
-      if (data.trim() === "success") {
-        successMsg.textContent = "Your Registration is Successfully Completed";
+    .then(response => {
+      if (response.ok) {
+        
+        successMsg.textContent = "Your registration was completed successfully!";
         successMsg.classList.remove('d-none');
         errorMsg.classList.add('d-none');
         form.reset();
@@ -89,8 +89,6 @@
     });
   });
 </script>
-
-
 
 
 </body>

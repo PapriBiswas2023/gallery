@@ -38,14 +38,44 @@
     <div class="marquee">
       <span>Login Here</span>
     </div>
-    <form class="container mt-5" style="max-width: 500px; background-color: #f8f9fa; padding: 20px; border-radius: 5px;">
+    <form class="container mt-5" style="max-width: 500px; background-color: #f8f9fa; padding: 20px; border-radius: 5px;" method="POST" 
+          action="../database/login-prc.php">
 
   <div class="mb-3">
     <label for="Phone" class="form-label">Phone Number</label>
-    <input type="text" class="form-control" id="Phone">
+    <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number here">
   </div>
+
+   <div class="mb-3">
+        <label for="otp" class="form-label">Enter OTP</label>
+        <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter OTP here">
+      </div>
   
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-secondary" onclick="sendOtp()">Send OTP</button>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
 </form>
+
+<script>
+function sendOtp() {
+    let phone = document.getElementById("Phone").value;
+    if(phone === "") {
+        alert("Please enter phone number");
+        return;
+    }
+
+    
+    fetch("../database/send-otp.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "phone=" + phone
+    })
+    .then(res => res.text())
+    .then(data => {
+        alert(data); 
+    });
+}
+</script>
 </body>
 </html>
