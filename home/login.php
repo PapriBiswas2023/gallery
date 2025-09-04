@@ -59,7 +59,7 @@
 
 <script>
 function sendOtp() {
-    let phone = document.getElementById("Phone").value;
+    let phone = document.getElementById("phone").value;
     if(phone === "") {
         alert("Please enter phone number");
         return;
