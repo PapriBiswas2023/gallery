@@ -37,9 +37,10 @@ $result = mysqli_query($conn, $sql);
 
       
       <div class="d-flex">
+        <?php if (!isset($_SESSION['phone'])): ?>
         <a href="registration.php"><button class="btn btn-outline-success me-2" type="button">Registration</button></a>
         <a href="login.php"><button class="btn btn-outline-success" type="button">Login</button></a>
-        
+        <?php endif; ?>
         
         <button class="navbar-toggler ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
           <span class="navbar-toggler-icon"></span>
@@ -49,7 +50,15 @@ $result = mysqli_query($conn, $sql);
       
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+          <div class="text-center mb-3">
+    <h6 class="fw-bold">
+        <?php echo htmlspecialchars($_SESSION['username'] ?? 'Guest'); ?>
+    </h6>
+    <?php if (!empty($_SESSION['email'])): ?>
+        <small class="text-muted"><?php echo htmlspecialchars($_SESSION['email']); ?></small>
+    <?php endif; ?>
+</div>
+          
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -63,7 +72,7 @@ $result = mysqli_query($conn, $sql);
             <li class="nav-item">
               <a class="nav-link" href="#">Download</a>
             </li>
-            <li class="nav-item">Logout</li>
+            <li class="nav-item" href="../database/logout.php">Logout</li>
           </ul>
         </div>
       </div>
@@ -86,9 +95,12 @@ $result = mysqli_query($conn, $sql);
                 echo '<div class="col-md-3 mb-4">';
                 echo '  <div class="card shadow-sm">';
                 echo '    <img src="'.$row['filename'].'" class="card-img-top fixed-img" alt="'.htmlspecialchars($row['filename']).'">';
+                echo '    <div class="row mb-2">';
                 echo '    <div class="card-body text-center">';
                 echo '      <p class="card-text">'.htmlspecialchars($row['category']).'</p>';
                 echo '     <a href="download.php?file=' . urlencode($row['filename']) . '" download class="btn btn-success btn-sm">Download</a> ';
+                echo '     <a href="download.php?file=' . urlencode($row['filename']) . '" download class="btn btn-success btn-sm">WishList</a> ';
+                echo '    </div>';
                 echo '    </div>';
                 echo '  </div>';
                 echo '</div>';
